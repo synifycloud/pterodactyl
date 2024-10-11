@@ -1,9 +1,9 @@
-import tw from 'twin.macro';
+import tw, { theme } from 'twin.macro';
 import { createGlobalStyle } from 'styled-components/macro';
 
 export default createGlobalStyle`
     body {
-        ${tw`font-sans bg-neutral-800 text-neutral-200`};
+        ${tw`font-sans bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200`};
         letter-spacing: 0.015em;
     }
 
@@ -12,7 +12,7 @@ export default createGlobalStyle`
     }
 
     p {
-        ${tw`text-neutral-200 leading-snug font-sans`};
+        ${tw`leading-snug font-sans`};
     }
 
     form {
@@ -36,20 +36,21 @@ export default createGlobalStyle`
     /* Scroll Bar Style */
     ::-webkit-scrollbar {
         background: none;
-        width: 16px;
-        height: 16px;
+        width: 10px;
     }
 
     ::-webkit-scrollbar-thumb {
         border: solid 0 rgb(0 0 0 / 0%);
-        border-right-width: 4px;
-        border-left-width: 4px;
+        border-right-width: 1px;
+        border-left-width: 1px;
         -webkit-border-radius: 9px 4px;
-        -webkit-box-shadow: inset 0 0 0 1px hsl(211, 10%, 53%), inset 0 0 0 4px hsl(209deg 18% 30%);
+        background-color: ${theme('colors.neutral.700').toString()};
     }
 
+    
+
     ::-webkit-scrollbar-track-piece {
-        margin: 4px 0;
+        margin: 2px 0;
     }
 
     ::-webkit-scrollbar-thumb:horizontal {
