@@ -1,5 +1,5 @@
 .button {
-    @apply px-4 py-2 inline-flex items-center justify-center;
+    @apply px-4 py-2 inline-flex items-center justify-center shadow-md;
     @apply rounded text-base font-semibold transition-all duration-100;
     @apply focus:ring-[3px] focus:ring-offset-2 focus:ring-offset-gray-700 focus:ring-opacity-50;
 
@@ -47,8 +47,8 @@
 }
 
 .text {
-    @apply bg-gray-500 text-gray-50;
-    @apply hover:bg-gray-400 active:bg-gray-400 focus:ring-gray-300 focus:ring-opacity-50;
+    @apply bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-50;
+    @apply hover:bg-neutral-200 dark:hover:bg-neutral-700 active:bg-neutral-100 dark:active:bg-neutral-800 focus:ring-neutral-300 focus:ring-opacity-50;
 
     &.secondary {
         @apply hover:bg-gray-500 active:bg-gray-500;

@@ -18,7 +18,7 @@ const RightNavigation = styled.div`
     & > a,
     & > button,
     & > .navigation-link {
-        ${tw`flex items-center h-full no-underline text-neutral-300 px-6 cursor-pointer transition-all duration-150`};
+        ${tw`flex items-center h-full no-underline text-neutral-700 dark:text-neutral-300 px-6 cursor-pointer transition-all duration-150`};
 
         &:active,
         &:hover {
@@ -28,7 +28,7 @@ const RightNavigation = styled.div`
         &:active,
         &:hover,
         &.active {
-            box-shadow: inset 0 -2px ${theme`colors.cyan.600`.toString()};
+            box-shadow: inset 0 -2px ${theme`colors.indigo.600`.toString()};
         }
     }
 `;
@@ -50,27 +50,31 @@ export default () => {
     const id = useParams<{ id: string }>().id;
 
     return (
-        <div className={'w-full bg-white dark:bg-neutral-900 shadow-md overflow-x-auto'}>
+        <div
+            className={
+                'w-full bg-white dark:bg-neutral-900 shadow-md overflow-x-auto dark:border-b dark:border-neutral-600/20 text-neutral-900 dark:text-neutral-200 fixed left-0 top-0 z-40 pl-[240px]'
+            }
+        >
             <SpinnerOverlay visible={isLoggingOut} />
             <div className={'mx-auto w-full flex items-center h-[3.5rem]'}>
                 <div id={'logo'} className={'flex-1'}>
                     <Switch location={location}>
                         {routes.server.map(({ path, header }) => (
                             <Route key={path} path={`/server/${id}${path}`} exact>
-                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150 select-none'>
+                                <h1 className='text-2xl font-header px-4 no-underline transition-colors duration-150 select-none'>
                                     {header}
                                 </h1>
                             </Route>
                         ))}
                         {routes.account.map(({ path, name }) => (
                             <Route key={path} path={`/account${path}`} exact>
-                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150 select-none'>
+                                <h1 className='text-2xl font-header px-4 no-underline transition-colors duration-150 select-none'>
                                     {name}
                                 </h1>
                             </Route>
                         ))}
                         <Route path={'/'} exact>
-                            <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150 select-none'>
+                            <h1 className='text-2xl font-header px-4 no-underline transition-colors duration-150 select-none'>
                                 Dashboard
                             </h1>
                         </Route>
