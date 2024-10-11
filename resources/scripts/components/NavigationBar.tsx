@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import { Link, NavLink, Route, Switch } from 'react-router-dom';
 import { useLocation, useParams } from 'react-router';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCogs, faLayerGroup, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
@@ -14,6 +12,7 @@ import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Avatar from '@/components/Avatar';
 import routes from '@/routers/routes';
+import { Layers, LogOut, Settings } from 'lucide-react';
 
 const RightNavigation = styled.div`
     & > a,
@@ -70,19 +69,24 @@ export default () => {
                                 </h1>
                             </Route>
                         ))}
+                        <Route path={'/'} exact>
+                            <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'>
+                                Dashboard
+                            </h1>
+                        </Route>
                     </Switch>
                 </div>
                 <RightNavigation className={'flex h-full items-center justify-center'}>
                     <SearchContainer />
                     <Tooltip placement={'bottom'} content={'Dashboard'}>
                         <NavLink to={'/'} exact>
-                            <FontAwesomeIcon icon={faLayerGroup} />
+                            <Layers width={20} />
                         </NavLink>
                     </Tooltip>
                     {rootAdmin && (
                         <Tooltip placement={'bottom'} content={'Admin'}>
                             <a href={'/admin'} rel={'noreferrer'}>
-                                <FontAwesomeIcon icon={faCogs} />
+                                <Settings width={20} />
                             </a>
                         </Tooltip>
                     )}
@@ -95,7 +99,7 @@ export default () => {
                     </Tooltip>
                     <Tooltip placement={'bottom'} content={'Sign Out'}>
                         <button onClick={onTriggerLogout}>
-                            <FontAwesomeIcon icon={faSignOutAlt} />
+                            <LogOut width={20} />
                         </button>
                     </Tooltip>
                 </RightNavigation>
