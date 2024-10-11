@@ -5,14 +5,13 @@ module.exports = {
         './resources/scripts/**/*.{js,ts,tsx}',
         './resources/views/**/*.blade.php',
     ],
-    darkMode: 'media', // or 'media' or 'selector'
+    darkMode: 'class', // or 'media' or 'class'
     theme: {
         extend: {
             fontFamily: {
                 header: ['"IBM Plex Sans"', '"Roboto"', 'system-ui', 'sans-serif'],
             },
             colors: {
-                black: '#131a20',
                 // "primary" and "neutral" are deprecated, prefer the use of "blue" and "gray"
                 // in new code.
                 primary: colors.blue,

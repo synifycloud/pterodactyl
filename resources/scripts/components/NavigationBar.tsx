@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Link, NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import { useLocation, useParams } from 'react-router';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
@@ -22,7 +22,7 @@ const RightNavigation = styled.div`
 
         &:active,
         &:hover {
-            ${tw`text-neutral-100 bg-black`};
+            ${tw`text-black dark:text-white bg-neutral-300 dark:bg-neutral-800`};
         }
 
         &:active,
@@ -50,27 +50,27 @@ export default () => {
     const id = useParams<{ id: string }>().id;
 
     return (
-        <div className={'w-full bg-neutral-900 shadow-md overflow-x-auto'}>
+        <div className={'w-full bg-white dark:bg-neutral-900 shadow-md overflow-x-auto'}>
             <SpinnerOverlay visible={isLoggingOut} />
             <div className={'mx-auto w-full flex items-center h-[3.5rem]'}>
                 <div id={'logo'} className={'flex-1'}>
                     <Switch location={location}>
                         {routes.server.map(({ path, header }) => (
                             <Route key={path} path={`/server/${id}${path}`} exact>
-                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'>
+                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150 select-none'>
                                     {header}
                                 </h1>
                             </Route>
                         ))}
                         {routes.account.map(({ path, name }) => (
                             <Route key={path} path={`/account${path}`} exact>
-                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'>
+                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150 select-none'>
                                     {name}
                                 </h1>
                             </Route>
                         ))}
                         <Route path={'/'} exact>
-                            <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'>
+                            <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150 select-none'>
                                 Dashboard
                             </h1>
                         </Route>
