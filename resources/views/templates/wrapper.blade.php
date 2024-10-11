@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="dark">
     <head>
         <title>{{ config('app.name', 'Pterodactyl') }}</title>
 
@@ -40,7 +40,7 @@
 
         @include('layouts.scripts')
     </head>
-    <body class="{{ $css['body'] ?? 'bg-neutral-50' }}">
+    <body class="{{ $css['body'] ?? 'bg-white dark:bg-neutral-900' }}">
         @section('content')
             @yield('above-container')
             @yield('container')
