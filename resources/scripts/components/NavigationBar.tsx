@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, Route, Switch } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCogs, faLayerGroup, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { useStoreState } from 'easy-peasy';
@@ -12,6 +13,7 @@ import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Avatar from '@/components/Avatar';
+import routes from '@/routers/routes';
 
 const RightNavigation = styled.div`
     & > a,
@@ -33,7 +35,7 @@ const RightNavigation = styled.div`
 `;
 
 export default () => {
-    const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
+    //const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -45,19 +47,30 @@ export default () => {
         });
     };
 
+    const location = useLocation();
+    const id = useParams<{ id: string }>().id;
+
     return (
         <div className={'w-full bg-neutral-900 shadow-md overflow-x-auto'}>
             <SpinnerOverlay visible={isLoggingOut} />
-            <div className={'mx-auto w-full flex items-center h-[3.5rem] max-w-[1200px]'}>
+            <div className={'mx-auto w-full flex items-center h-[3.5rem]'}>
                 <div id={'logo'} className={'flex-1'}>
-                    <Link
-                        to={'/'}
-                        className={
-                            'text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'
-                        }
-                    >
-                        {name}
-                    </Link>
+                    <Switch location={location}>
+                        {routes.server.map(({ path, header }) => (
+                            <Route key={path} path={`/server/${id}${path}`} exact>
+                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'>
+                                    {header}
+                                </h1>
+                            </Route>
+                        ))}
+                        {routes.account.map(({ path, name }) => (
+                            <Route key={path} path={`/account${path}`} exact>
+                                <h1 className='text-2xl font-header px-4 no-underline text-neutral-200 hover:text-neutral-100 transition-colors duration-150'>
+                                    {name}
+                                </h1>
+                            </Route>
+                        ))}
+                    </Switch>
                 </div>
                 <RightNavigation className={'flex h-full items-center justify-center'}>
                     <SearchContainer />

@@ -33,6 +33,7 @@ interface RouteDefinition {
 
 interface ServerRouteDefinition extends RouteDefinition {
     permission: string | string[] | null;
+    header: string;
 }
 
 interface Routes {
@@ -71,6 +72,7 @@ export default {
             path: '/',
             permission: null,
             name: 'Console',
+            header: 'Console',
             component: ServerConsole,
             exact: true,
         },
@@ -78,66 +80,77 @@ export default {
             path: '/files',
             permission: 'file.*',
             name: 'Files',
+            header: 'File Management',
             component: FileManagerContainer,
         },
         {
             path: '/files/:action(edit|new)',
             permission: 'file.*',
             name: undefined,
+            header: 'File Editor',
             component: FileEditContainer,
         },
         {
             path: '/databases',
             permission: 'database.*',
             name: 'Databases',
+            header: 'Databases',
             component: DatabasesContainer,
         },
         {
             path: '/schedules',
             permission: 'schedule.*',
             name: 'Schedules',
+            header: 'Task Scheduling',
             component: ScheduleContainer,
         },
         {
             path: '/schedules/:id',
             permission: 'schedule.*',
             name: undefined,
+            header: 'Edit Schedule',
             component: ScheduleEditContainer,
         },
         {
             path: '/users',
             permission: 'user.*',
             name: 'Users',
+            header: 'User Management',
             component: UsersContainer,
         },
         {
             path: '/backups',
             permission: 'backup.*',
             name: 'Backups',
+            header: 'Backups',
             component: BackupContainer,
         },
         {
             path: '/network',
             permission: 'allocation.*',
             name: 'Network',
+            header: 'Network Settings',
             component: NetworkContainer,
         },
         {
             path: '/startup',
             permission: 'startup.*',
             name: 'Startup',
+            header: 'Startup Settings',
             component: StartupContainer,
         },
         {
             path: '/settings',
             permission: ['settings.*', 'file.sftp'],
             name: 'Settings',
+            header: 'Server Settings',
             component: SettingsContainer,
         },
         {
             path: '/activity',
             permission: 'activity.*',
             name: 'Activity',
+            header: 'Server Activity',
             component: ServerActivityLogContainer,
         },
     ],
