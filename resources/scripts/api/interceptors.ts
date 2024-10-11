@@ -16,6 +16,6 @@ export const setupInterceptors = (history: History) => {
                 }
             }
             throw error;
-        }
+        },
     );
 };

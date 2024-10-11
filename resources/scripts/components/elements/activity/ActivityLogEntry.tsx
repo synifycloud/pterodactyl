@@ -23,12 +23,15 @@ function wrapProperties(value: unknown): any {
     }
 
     if (isObject(value)) {
-        return getObjectKeys(value).reduce((obj, key) => {
-            if (key === 'count' || (typeof key === 'string' && key.endsWith('_count'))) {
-                return { ...obj, [key]: value[key] };
-            }
-            return { ...obj, [key]: wrapProperties(value[key]) };
-        }, {} as Record<string, unknown>);
+        return getObjectKeys(value).reduce(
+            (obj, key) => {
+                if (key === 'count' || (typeof key === 'string' && key.endsWith('_count'))) {
+                    return { ...obj, [key]: value[key] };
+                }
+                return { ...obj, [key]: wrapProperties(value[key]) };
+            },
+            {} as Record<string, unknown>,
+        );
     }
 
     if (Array.isArray(value)) {
@@ -44,13 +47,13 @@ export default ({ activity, children }: Props) => {
     const properties = wrapProperties(activity.properties);
 
     return (
-        <div className={'grid grid-cols-10 py-4 border-b-2 border-gray-800 last:rounded-b last:border-0 group'}>
-            <div className={'hidden sm:flex sm:col-span-1 items-center justify-center select-none'}>
-                <div className={'flex items-center w-10 h-10 rounded-full bg-gray-600 overflow-hidden'}>
+        <div className={'group grid grid-cols-10 border-b-2 border-gray-800 py-4 last:rounded-b last:border-0'}>
+            <div className={'hidden select-none items-center justify-center sm:col-span-1 sm:flex'}>
+                <div className={'flex h-10 w-10 items-center overflow-hidden rounded-full bg-gray-600'}>
                     <Avatar name={actor?.uuid || 'system'} />
                 </div>
             </div>
-            <div className={'col-span-10 sm:col-span-9 flex'}>
+            <div className={'col-span-10 flex sm:col-span-9'}>
                 <div className={'flex-1 px-4 sm:px-0'}>
                     <div className={'flex items-center text-gray-50'}>
                         <Tooltip placement={'top'} content={actor?.email || 'System User'}>
@@ -59,7 +62,7 @@ export default ({ activity, children }: Props) => {
                         <span className={'text-gray-400'}>&nbsp;&mdash;&nbsp;</span>
                         <Link
                             to={`#${pathTo({ event: activity.event })}`}
-                            className={'transition-colors duration-75 active:text-cyan-400 hover:text-cyan-400'}
+                            className={'transition-colors duration-75 hover:text-cyan-400 active:text-cyan-400'}
                         >
                             {activity.event}
                         </Link>

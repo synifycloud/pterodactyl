@@ -53,7 +53,7 @@ export default () => {
 
     const schedule = ServerContext.useStoreState(
         (st) => st.schedules.data.find((s) => s.id === Number(scheduleId)),
-        isEqual
+        isEqual,
     );
     const appendSchedule = ServerContext.useStoreActions((actions) => actions.schedules.appendSchedule);
 
@@ -122,7 +122,7 @@ export default () => {
                             </div>
                             <div css={tw`flex sm:block mt-3 sm:mt-0`}>
                                 <Can action={'schedule.update'}>
-                                    <Button.Text className={'flex-1 mr-4'} onClick={toggleEditModal}>
+                                    <Button.Text className={'mr-4 flex-1'} onClick={toggleEditModal}>
                                         Edit
                                     </Button.Text>
                                     <NewTaskButton schedule={schedule} />
@@ -140,7 +140,7 @@ export default () => {
                             {schedule.tasks.length > 0
                                 ? schedule.tasks
                                       .sort((a, b) =>
-                                          a.sequenceId === b.sequenceId ? 0 : a.sequenceId > b.sequenceId ? 1 : -1
+                                          a.sequenceId === b.sequenceId ? 0 : a.sequenceId > b.sequenceId ? 1 : -1,
                                       )
                                       .map((task) => (
                                           <ScheduleTaskRow

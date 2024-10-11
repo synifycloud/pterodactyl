@@ -17,9 +17,7 @@ module.exports = {
             prefix: '<rootDir>/',
         }),
     },
-    setupFilesAfterEnv: [
-        '<rootDir>/resources/scripts/setup-tests.ts',
-    ],
+    setupFilesAfterEnv: ['<rootDir>/resources/scripts/setup-tests.ts'],
     transform: {
         '.*\\.[t|j]sx$': 'babel-jest',
         '.*\\.ts$': 'ts-jest',

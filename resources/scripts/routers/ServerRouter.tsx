@@ -45,7 +45,7 @@ export default () => {
         () => () => {
             clearServerState();
         },
-        []
+        [],
     );
 
     useEffect(() => {
@@ -78,7 +78,7 @@ export default () => {
                                 <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
                                     {route.name}
                                 </NavLink>
-                            )
+                            ),
                         )}
                     {rootAdmin && (
                         // eslint-disable-next-line react/jsx-no-target-blank
@@ -88,7 +88,7 @@ export default () => {
                     )}
                 </div>
             </SubNavigation>
-            <div className='grid pl-[60px] xl:pl-[240px] duration-300 transition-all pt-14 w-full'>
+            <div className='grid w-full pl-[60px] pt-14 transition-all duration-300 xl:pl-[240px]'>
                 <NavigationBar />
                 {!uuid || !id ? (
                     error ? (

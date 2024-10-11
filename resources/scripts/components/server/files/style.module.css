@@ -1,12 +1,12 @@
 .manager_actions {
-    @apply grid grid-cols-2 sm:grid-cols-3 w-full gap-4 mb-4;
+    @apply mb-4 grid w-full grid-cols-2 gap-4 sm:grid-cols-3;
 
     & button {
         @apply w-full first:col-span-2 sm:first:col-span-1;
     }
 
     @screen md {
-        @apply flex flex-1 justify-end mb-0;
+        @apply mb-0 flex flex-1 justify-end;
 
         & button {
             @apply w-auto;
@@ -15,11 +15,11 @@
 }
 
 .file_row {
-    @apply flex items-center cursor-pointer bg-neutral-700 rounded-sm mb-px text-sm no-underline;
-    @apply hover:text-neutral-100 hover:bg-neutral-600;
+    @apply mb-px flex cursor-pointer items-center rounded-sm bg-neutral-700 text-sm no-underline;
+    @apply hover:bg-neutral-600 hover:text-neutral-100;
 
     & > .details {
-        @apply flex flex-1 items-center text-neutral-300 no-underline px-4 py-2 overflow-hidden truncate;
+        @apply flex flex-1 items-center overflow-hidden truncate px-4 py-2 text-neutral-300 no-underline;
 
         &:not(a) {
             @apply cursor-default;

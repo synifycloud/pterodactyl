@@ -35,7 +35,7 @@ const getBackgroundColor = (value: number, max: number | null): string | undefin
 const Limit = ({ limit, children }: { limit: string | null; children: React.ReactNode }) => (
     <>
         {children}
-        <span className={'ml-1 text-gray-300 text-[70%] select-none'}>/ {limit || <>&infin;</>}</span>
+        <span className={'ml-1 select-none text-[70%] text-gray-300'}>/ {limit || <>&infin;</>}</span>
     </>
 );
 
@@ -53,7 +53,7 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
             memory: limits?.memory ? bytesToString(mbToBytes(limits.memory)) : null,
             disk: limits?.disk ? bytesToString(mbToBytes(limits.disk)) : null,
         }),
-        [limits]
+        [limits],
     );
 
     const allocation = ServerContext.useStoreState((state) => {

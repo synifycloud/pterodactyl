@@ -16,7 +16,7 @@ const useSSHKeys = (config?: ConfigInterface<SSHKey[], AxiosError>) => {
                 return Transformers.toSSHKey(datum.attributes);
             });
         },
-        { revalidateOnMount: false, ...(config || {}) }
+        { revalidateOnMount: false, ...(config || {}) },
     );
 };
 

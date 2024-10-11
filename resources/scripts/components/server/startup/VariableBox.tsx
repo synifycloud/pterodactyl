@@ -38,11 +38,11 @@ const VariableBox = ({ variable }: Props) => {
                         ...data,
                         invocation,
                         variables: (data.variables || []).map((v) =>
-                            v.envVariable === response.envVariable ? response : v
+                            v.envVariable === response.envVariable ? response : v,
                         ),
                     }),
-                    false
-                )
+                    false,
+                ),
             )
             .catch((error) => {
                 console.error(error);
@@ -52,7 +52,7 @@ const VariableBox = ({ variable }: Props) => {
     }, 500);
 
     const useSwitch = variable.rules.some(
-        (v) => v === 'boolean' || v === 'in:0,1' || v === 'in:1,0' || v === 'in:true,false' || v === 'in:false,true'
+        (v) => v === 'boolean' || v === 'in:0,1' || v === 'in:1,0' || v === 'in:true,false' || v === 'in:false,true',
     );
     const isStringSwitch = variable.rules.some((v) => v === 'string');
     const selectValues = variable.rules.find((v) => v.startsWith('in:'))?.split(',') || [];
@@ -62,7 +62,7 @@ const VariableBox = ({ variable }: Props) => {
             title={
                 <p className='text-sm uppercase'>
                     {!variable.isEditable && (
-                        <span className='bg-neutral-700 text-xs py-1 px-2 rounded-full mr-2 mb-1'>Read Only</span>
+                        <span className='mr-2 mb-1 rounded-full bg-neutral-700 py-1 px-2 text-xs'>Read Only</span>
                     )}
                     {variable.name}
                 </p>

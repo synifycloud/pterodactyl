@@ -8,16 +8,12 @@
     "name": "Sponge (SpongeVanilla)",
     "author": "support@pterodactyl.io",
     "description": "SpongeVanilla is the SpongeAPI implementation for Vanilla Minecraft.",
-    "features": [
-        "eula",
-        "java_version",
-        "pid_limit"
-    ],
+    "features": ["eula", "java_version", "pid_limit"],
     "docker_images": {
-        "Java 21": "ghcr.io\/pterodactyl\/yolks:java_21",
-        "Java 16": "ghcr.io\/pterodactyl\/yolks:java_16",
-        "Java 11": "ghcr.io\/pterodactyl\/yolks:java_11",
-        "Java 8": "ghcr.io\/pterodactyl\/yolks:java_8"
+        "Java 21": "ghcr.io/pterodactyl/yolks:java_21",
+        "Java 16": "ghcr.io/pterodactyl/yolks:java_16",
+        "Java 11": "ghcr.io/pterodactyl/yolks:java_11",
+        "Java 8": "ghcr.io/pterodactyl/yolks:java_8"
     },
     "file_denylist": [],
     "startup": "java -Xms128M -XX:MaxRAMPercentage=95.0 -jar {{SERVER_JARFILE}}",
@@ -29,8 +25,8 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/ash\r\n# Sponge Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\n\r\ncd \/mnt\/server\r\n\r\ncurl -sSL \"https:\/\/repo.spongepowered.org\/maven\/org\/spongepowered\/spongevanilla\/${SPONGE_VERSION}\/spongevanilla-${SPONGE_VERSION}.jar\" -o ${SERVER_JARFILE}",
-            "container": "ghcr.io\/pterodactyl\/installers:alpine",
+            "script": "#!/bin/ash\r\n# Sponge Installation Script\r\n#\r\n# Server Files: /mnt/server\r\n\r\ncd /mnt/server\r\n\r\ncurl -sSL \"https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/${SPONGE_VERSION}/spongevanilla-${SPONGE_VERSION}.jar\" -o ${SERVER_JARFILE}",
+            "container": "ghcr.io/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
     },
@@ -42,7 +38,7 @@
             "default_value": "1.12.2-7.3.0",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([a-zA-Z0-9.\\-_]+)$\/",
+            "rules": "required|regex:/^([a-zA-Z0-9.\\-_]+)$/",
             "field_type": "text"
         },
         {
@@ -52,7 +48,7 @@
             "default_value": "server.jar",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "required|regex:\/^([\\w\\d._-]+)(\\.jar)$\/",
+            "rules": "required|regex:/^([\\w\\d._-]+)(\\.jar)$/",
             "field_type": "text"
         }
     ]

@@ -14,6 +14,6 @@ export default () => {
 
             return (data.data || []).map(rawDataToServerAllocation);
         },
-        { revalidateOnFocus: false, revalidateOnMount: false }
+        { revalidateOnFocus: false, revalidateOnMount: false },
     );
 };

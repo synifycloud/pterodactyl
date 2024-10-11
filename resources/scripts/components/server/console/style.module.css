@@ -51,7 +51,7 @@
     }
 
     & .command_input {
-        @apply relative w-full bg-white px-2 py-2 pl-10 pr-4 font-mono text-sm text-gray-100 dark:bg-neutral-800 sm:rounded-b shadow-md;
+        @apply relative w-full bg-white px-2 py-2 pl-10 pr-4 font-mono text-sm text-gray-100 shadow-md dark:bg-neutral-800 sm:rounded-b;
         @apply outline-none focus:ring-0 focus-visible:outline-none;
         @apply border-0 border-b-2 border-transparent transition-colors duration-100;
         @apply focus:border-indigo-500 active:border-indigo-500;
