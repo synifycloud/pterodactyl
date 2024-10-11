@@ -8,7 +8,7 @@
     "name": "Sponge (SpongeVanilla)",
     "author": "support@pterodactyl.io",
     "description": "SpongeVanilla is the SpongeAPI implementation for Vanilla Minecraft.",
-    "features": ["eula", "java_version", "pid_limit"],
+    "features": ["eula", "java_version", "pid_limit", "minecraft_addons"],
     "docker_images": {
         "Java 21": "ghcr.io/pterodactyl/yolks:java_21",
         "Java 16": "ghcr.io/pterodactyl/yolks:java_16",
