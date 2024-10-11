@@ -27,7 +27,7 @@ export default () => {
                     </div>
                 </SubNavigation>
             )}
-            <div className='grid pl-[240px] pt-14 w-full'>
+            <div className={`grid ${location.pathname.startsWith('/account') && "pl-[60px] xl:pl-[240px] duration-300"} pt-14 w-full`}>
                 <NavigationBar />
                 <TransitionRouter>
                     <React.Suspense fallback={<Spinner centered />}>

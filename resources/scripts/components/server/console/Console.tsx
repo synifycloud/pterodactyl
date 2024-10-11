@@ -14,13 +14,13 @@ import { debounce } from 'debounce';
 import { usePersistedState } from '@/plugins/usePersistedState';
 import { SocketEvent, SocketRequest } from '@/components/server/events';
 import classNames from 'classnames';
-import { ChevronDoubleRightIcon } from '@heroicons/react/solid';
+import { ChevronsRight } from 'lucide-react';
 
 import 'xterm/css/xterm.css';
 import styles from './style.module.css';
 
-const theme = {
-    background: th`colors.black`.toString(),
+const darkTheme = {
+    background: th`colors.neutral.900`.toString(),
     cursor: 'transparent',
     black: th`colors.black`.toString(),
     red: '#E54B4B',
@@ -41,6 +41,30 @@ const theme = {
     selection: '#FAF089',
 };
 
+const lightTheme = {
+    background: th`colors.neutral.300`.toString(),
+    cursor: 'transparent',
+    black: th`colors.black`.toString(),
+    red: '#E54B4B',
+    green: '#9ECE58',
+    yellow: '#FAED70',
+    blue: '#396FE2',
+    magenta: '#BB80B3',
+    cyan: '#2DDAFD',
+    white: '#000000', // Changed to black for better visibility
+    brightBlack: 'rgba(0, 0, 0, 0.2)',
+    brightRed: '#FF5370',
+    brightGreen: '#C3E88D',
+    brightYellow: '#FFCB6B',
+    brightBlue: '#82AAFF',
+    brightMagenta: '#C792EA',
+    brightCyan: '#89DDFF',
+    brightWhite: '#000000', // Changed to black for better visibility
+    selection: '#FAF089',
+};
+
+const getTerminalTheme = () => (document.documentElement.classList.contains('dark') ? darkTheme : lightTheme);
+
 const terminalProps: ITerminalOptions = {
     disableStdin: true,
     cursorStyle: 'underline',
@@ -48,11 +72,11 @@ const terminalProps: ITerminalOptions = {
     fontSize: 12,
     fontFamily: th('fontFamily.mono'),
     rows: 30,
-    theme: theme,
+    theme: getTerminalTheme(),
 };
 
 export default () => {
-    const TERMINAL_PRELUDE = '\u001b[1m\u001b[33mcontainer@pterodactyl~ \u001b[0m';
+    const TERMINAL_PRELUDE = '\u001b[1m\u001b[33mcontainer@synify~ \u001b[0m';
     const ref = useRef<HTMLDivElement>(null);
     const terminal = useMemo(() => new Terminal({ ...terminalProps }), []);
     const fitAddon = new FitAddon();
@@ -86,7 +110,7 @@ export default () => {
 
     const handleDaemonErrorOutput = (line: string) =>
         terminal.writeln(
-            TERMINAL_PRELUDE + '\u001b[1m\u001b[41m' + line.replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m'
+            TERMINAL_PRELUDE + '\u001b[1m\u001b[41m' + line.replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m',
         );
 
     const handlePowerChangeEvent = (state: string) =>
@@ -156,7 +180,7 @@ export default () => {
             if (terminal.element) {
                 fitAddon.fit();
             }
-        }, 100)
+        }, 100),
     );
 
     useEffect(() => {
@@ -191,6 +215,20 @@ export default () => {
         };
     }, [connected, instance]);
 
+    useEffect(() => {
+        terminal.options.theme = getTerminalTheme();
+        const observer = new MutationObserver(() => {
+            terminal.options.theme = getTerminalTheme();
+        });
+
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+        });
+
+        return () => observer.disconnect();
+    }, [terminal]);
+
     return (
         <div className={classNames(styles.terminal, 'relative')}>
             <SpinnerOverlay visible={!connected} size={'large'} />
@@ -215,11 +253,11 @@ export default () => {
                     />
                     <div
                         className={classNames(
-                            'text-gray-100 peer-focus:text-gray-50 peer-focus:animate-pulse',
-                            styles.command_icon
+                            'text-gray-100 peer-focus:animate-pulse peer-focus:text-gray-50',
+                            styles.command_icon,
                         )}
                     >
-                        <ChevronDoubleRightIcon className={'w-4 h-4'} />
+                        <ChevronsRight className={'h-4 w-4'} />
                     </div>
                 </div>
             )}

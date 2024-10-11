@@ -57,13 +57,10 @@
         </button>
         <script>
             function toggleDarkMode() {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('darkMode', 'false');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('darkMode', 'true');
-                }
+                const html = document.documentElement;
+                const darkMode = html.classList.contains('dark');
+                localStorage.setItem('darkMode', !darkMode);
+                html.classList.toggle('dark');
             }
 
             if (localStorage.getItem('darkMode') === 'true') {

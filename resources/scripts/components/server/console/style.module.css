@@ -1,25 +1,25 @@
 .stat_block {
-    @apply flex items-center rounded shadow-lg relative;
+    @apply relative flex items-center rounded shadow-lg;
     @apply col-span-3 md:col-span-2 lg:col-span-6;
     @apply px-3 py-2 md:p-3 lg:p-4;
 
     & > .status_bar {
-        @apply w-1 h-full absolute left-0 top-0 rounded-l sm:hidden;
+        @apply absolute left-0 top-0 h-full w-1 rounded-l sm:hidden;
     }
 
     & > .icon {
-        @apply hidden flex-shrink-0 items-center justify-center rounded-lg shadow-md w-12 h-12;
+        @apply hidden h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg shadow-md;
         @apply transition-colors duration-500;
-        @apply sm:flex sm:mr-4;
+        @apply sm:mr-4 sm:flex;
 
         & > svg {
-            @apply w-6 h-6 m-auto;
+            @apply m-auto h-6 w-6;
         }
     }
 }
 
 .terminal {
-    @apply flex flex-col w-full;
+    @apply flex w-full flex-col;
 
     & .overflows_container {
         @apply -ml-4 sm:ml-0;
@@ -31,7 +31,7 @@
     }
 
     & > .container {
-        @apply rounded-t p-1 sm:p-2 bg-black min-h-[16rem] flex-1 font-mono text-sm;
+        @apply min-h-[16rem] flex-1 rounded-t border border-b-0 border-neutral-300 bg-neutral-300 p-1 font-mono text-sm sm:p-2;
 
         & #terminal {
             @apply h-full;
@@ -47,17 +47,31 @@
     }
 
     & .command_icon {
-        @apply flex items-center top-0 left-0 absolute z-10 select-none h-full px-3 transition-colors duration-100;
+        @apply absolute top-0 left-0 z-10 flex h-full select-none items-center px-3 transition-colors duration-100;
     }
 
     & .command_input {
-        @apply relative bg-gray-900 px-2 text-gray-100 pl-10 pr-4 py-2 w-full font-mono text-sm sm:rounded-b;
-        @apply focus:ring-0 outline-none focus-visible:outline-none;
+        @apply relative w-full bg-white px-2 py-2 pl-10 pr-4 font-mono text-sm text-gray-100 dark:bg-neutral-800 sm:rounded-b shadow-md;
+        @apply outline-none focus:ring-0 focus-visible:outline-none;
         @apply border-0 border-b-2 border-transparent transition-colors duration-100;
-        @apply active:border-cyan-500 focus:border-cyan-500;
+        @apply focus:border-indigo-500 active:border-indigo-500;
+    }
+}
+
+:global(.dark) .terminal {
+    & .container {
+        @apply border-neutral-700 bg-neutral-900;
+    }
+
+    & .command_input {
+        @apply bg-neutral-800 text-gray-100;
     }
 }
 
 .chart_container {
-    @apply bg-gray-600 rounded shadow-lg pt-2 border-b-4 border-gray-700 relative;
+    @apply relative rounded bg-white py-2 shadow-md;
+}
+
+:global(.dark) .chart_container {
+    @apply bg-neutral-800;
 }

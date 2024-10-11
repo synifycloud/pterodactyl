@@ -88,7 +88,7 @@ export default () => {
                     )}
                 </div>
             </SubNavigation>
-            <div className='grid pl-[240px] pt-14 w-full'>
+            <div className='grid pl-[60px] xl:pl-[240px] duration-300 transition-all pt-14 w-full'>
                 <NavigationBar />
                 {!uuid || !id ? (
                     error ? (

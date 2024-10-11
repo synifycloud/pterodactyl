@@ -30,7 +30,7 @@ const options: ChartOptions<'line'> = {
     scales: {
         x: {
             min: 0,
-            max: 19,
+            max: 119,
             type: 'linear',
             grid: {
                 display: false,
@@ -45,13 +45,17 @@ const options: ChartOptions<'line'> = {
             type: 'linear',
             grid: {
                 display: true,
-                color: theme('colors.gray.700'),
+                color: document.documentElement.classList.contains('dark')
+                    ? theme('colors.neutral.700')
+                    : theme('colors.neutral.200'),
                 drawBorder: false,
             },
             ticks: {
                 display: true,
                 count: 3,
-                color: theme('colors.gray.200'),
+                color: document.documentElement.classList.contains('dark')
+                    ? theme('colors.neutral.200')
+                    : theme('colors.neutral.700'),
                 font: {
                     family: theme('fontFamily.sans'),
                     size: 11,
@@ -80,7 +84,7 @@ function getEmptyData(label: string, sets = 1, callback?: ChartDatasetCallback |
     const next = callback || ((value) => value);
 
     return {
-        labels: Array(20)
+        labels: Array(120)
             .fill(0)
             .map((_, index) => index),
         datasets: Array(sets)
@@ -90,12 +94,12 @@ function getEmptyData(label: string, sets = 1, callback?: ChartDatasetCallback |
                     {
                         fill: true,
                         label,
-                        data: Array(20).fill(-5),
-                        borderColor: theme('colors.cyan.400'),
-                        backgroundColor: hexToRgba(theme('colors.cyan.700'), 0.5),
+                        data: Array(120).fill(-5),
+                        borderColor: theme('colors.indigo.400'),
+                        backgroundColor: hexToRgba(theme('colors.indigo.700'), 0.5),
                     },
-                    index
-                )
+                    index,
+                ),
             ),
     };
 }
@@ -110,7 +114,7 @@ interface UseChartOptions {
 
 function useChart(label: string, opts?: UseChartOptions) {
     const options = getOptions(
-        typeof opts?.options === 'number' ? { scales: { y: { min: 0, suggestedMax: opts.options } } } : opts?.options
+        typeof opts?.options === 'number' ? { scales: { y: { min: 0, suggestedMax: opts.options } } } : opts?.options,
     );
     const [data, setData] = useState(getEmptyData(label, opts?.sets || 1, opts?.callback));
 
@@ -123,7 +127,7 @@ function useChart(label: string, opts?: UseChartOptions) {
                         .slice(1)
                         .concat(typeof item === 'number' ? Number(item.toFixed(2)) : item),
                 })),
-            })
+            }),
         );
 
     const clear = () =>
@@ -131,9 +135,9 @@ function useChart(label: string, opts?: UseChartOptions) {
             merge(state, {
                 datasets: state.datasets.map((value) => ({
                     ...value,
-                    data: Array(20).fill(-5),
+                    data: Array(120).fill(-5),
                 })),
-            })
+            }),
         );
 
     return { props: { data, options }, push, clear };

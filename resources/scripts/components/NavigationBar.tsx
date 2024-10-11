@@ -51,30 +51,28 @@ export default () => {
 
     return (
         <div
-            className={
-                'w-full bg-white dark:bg-neutral-900 shadow-md overflow-x-auto dark:border-b dark:border-neutral-600/20 text-neutral-900 dark:text-neutral-200 fixed left-0 top-0 z-40 pl-[240px]'
-            }
+            className={`fixed left-0 top-0 z-40 w-full overflow-x-auto bg-white text-neutral-900 shadow-md dark:border-b dark:border-neutral-600/20 dark:bg-neutral-900 dark:text-neutral-200 ${(location.pathname.startsWith('/account') || location.pathname.startsWith('/server')) && 'pl-[60px] duration-300 xl:pl-[240px]'}`}
         >
             <SpinnerOverlay visible={isLoggingOut} />
-            <div className={'mx-auto w-full flex items-center h-[3.5rem]'}>
+            <div className={'mx-auto flex h-[3.5rem] w-full items-center'}>
                 <div id={'logo'} className={'flex-1'}>
                     <Switch location={location}>
                         {routes.server.map(({ path, header }) => (
                             <Route key={path} path={`/server/${id}${path}`} exact>
-                                <h1 className='text-2xl font-header px-4 no-underline transition-colors duration-150 select-none'>
+                                <h1 className='select-none px-4 font-header text-2xl no-underline transition-colors duration-150'>
                                     {header}
                                 </h1>
                             </Route>
                         ))}
                         {routes.account.map(({ path, name }) => (
                             <Route key={path} path={`/account${path}`} exact>
-                                <h1 className='text-2xl font-header px-4 no-underline transition-colors duration-150 select-none'>
+                                <h1 className='select-none px-4 font-header text-2xl no-underline transition-colors duration-150'>
                                     {name}
                                 </h1>
                             </Route>
                         ))}
                         <Route path={'/'} exact>
-                            <h1 className='text-2xl font-header px-4 no-underline transition-colors duration-150 select-none'>
+                            <h1 className='select-none px-4 font-header text-2xl no-underline transition-colors duration-150'>
                                 Dashboard
                             </h1>
                         </Route>
@@ -96,7 +94,7 @@ export default () => {
                     )}
                     <Tooltip placement={'bottom'} content={'Account Settings'}>
                         <NavLink to={'/account'}>
-                            <span className={'flex items-center w-5 h-5'}>
+                            <span className={'flex h-5 w-5 items-center'}>
                                 <Avatar.User />
                             </span>
                         </NavLink>

@@ -119,5 +119,5 @@ export const ServerContext = createContextStore<ServerStore>(
             name: 'ServerStore',
             trace: true,
         }),
-    }
+    },
 );
