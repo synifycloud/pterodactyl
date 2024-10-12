@@ -42,7 +42,7 @@ const darkTheme = {
 };
 
 const lightTheme = {
-    background: th`colors.neutral.300`.toString(),
+    background: th`colors.neutral.600`.toString(),
     cursor: 'transparent',
     black: th`colors.black`.toString(),
     red: '#E54B4B',

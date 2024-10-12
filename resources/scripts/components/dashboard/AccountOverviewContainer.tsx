@@ -9,6 +9,7 @@ import { breakpoint } from '@/theme';
 import styled from 'styled-components/macro';
 import MessageBox from '@/components/MessageBox';
 import { useLocation } from 'react-router-dom';
+import ConfigureThemeForm from './forms/ConfigureThemeForm';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -46,6 +47,9 @@ export default () => {
                 </ContentBox>
                 <ContentBox css={tw`md:ml-8 mt-8 md:mt-0`} title={'Two-Step Verification'}>
                     <ConfigureTwoFactorForm />
+                </ContentBox>
+                <ContentBox css={tw`mt-8`} title={'Theme'}>
+                    <ConfigureThemeForm />
                 </ContentBox>
             </Container>
         </PageContentBlock>

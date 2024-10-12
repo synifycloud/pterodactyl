@@ -31,7 +31,7 @@
     }
 
     & > .container {
-        @apply min-h-[16rem] flex-1 rounded-t border border-b-0 border-neutral-300 bg-neutral-300 p-1 font-mono text-sm sm:p-2;
+        @apply min-h-[16rem] flex-1 rounded-t border border-b-0 border-neutral-300 bg-neutral-600 p-1 font-mono text-sm sm:p-2;
 
         & #terminal {
             @apply h-full;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="">
+<html class="dark">
     <head>
         <title>{{ config('app.name', 'Pterodactyl') }}</title>
 
@@ -50,21 +50,11 @@
             {!! $asset->js('main.js') !!}
         @show
 
-        
-        <!-- Dark Mode Toggle Button -->
-
-        <button class="fixed bottom-5 right-5 p-6 bg-indigo-600 text-white rounded-full" onclick="toggleDarkMode()">
-        </button>
         <script>
-            function toggleDarkMode() {
-                const html = document.documentElement;
-                const darkMode = html.classList.contains('dark');
-                localStorage.setItem('darkMode', !darkMode);
-                html.classList.toggle('dark');
-            }
-
             if (localStorage.getItem('darkMode') === 'true') {
                 document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
             }
         </script>
     </body>
