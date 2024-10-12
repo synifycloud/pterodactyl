@@ -42,8 +42,12 @@
     }
 
     &:disabled {
-        @apply bg-indigo-500/75 text-indigo-400/75;
+        @apply bg-indigo-600/75 text-indigo-50/75;
     }
+}
+
+:global(.dark) .primary:disabled {
+    @apply bg-indigo-500/75 text-indigo-400/75;
 }
 
 .text {
@@ -65,7 +69,7 @@
 }
 
 .danger {
-    @apply bg-red-600 text-gray-800 hover:text-white;
+    @apply bg-red-600 text-red-50 hover:text-white;
     @apply hover:bg-red-500 focus:ring-red-400 focus:ring-opacity-75 active:bg-red-500;
 
     &.secondary {
@@ -75,8 +79,4 @@
     &:disabled {
         @apply bg-red-600/75 text-red-50/75;
     }
-}
-
-:global(.dark) .danger {
-    @apply text-red-50;
 }
