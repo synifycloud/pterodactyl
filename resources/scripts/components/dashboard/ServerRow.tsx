@@ -82,7 +82,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     </div>
                     <div className='mt-4'>
                         {!!server.description && (
-                            <p css={tw`text-sm text-neutral-300 break-words line-clamp-2`}>{server.description}</p>
+                            <p css={tw`text-sm text-neutral-600 dark:text-neutral-300 break-words line-clamp-2`}>
+                                {server.description}
+                            </p>
                         )}
                     </div>
                 </div>

@@ -18,7 +18,7 @@ const light = css<Props>`
 `;
 
 const checkboxStyle = css<Props>`
-    ${tw`bg-indigo-100 dark:bg-indigo-900 cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-indigo-600 border border-indigo-300 dark:border-indigo-700 rounded-sm`};
+    ${tw`bg-indigo-100 dark:bg-indigo-900/20 cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-indigo-600 border border-indigo-300 dark:border-indigo-700 rounded-sm`};
     color-adjust: exact;
     background-origin: border-box;
     transition:

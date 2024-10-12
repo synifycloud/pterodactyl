@@ -5,6 +5,7 @@ import tw from 'twin.macro';
 import modes from '@/modes';
 
 require('codemirror/lib/codemirror.css');
+require('codemirror/theme/ayu-mirage.css');
 require('codemirror/theme/duotone-dark.css');
 require('codemirror/theme/duotone-light.css');
 require('codemirror/addon/edit/closebrackets');
@@ -152,7 +153,7 @@ export default ({ style, initialContent, filename, mode, fetchContent, onContent
 
         const e = CodeMirror.fromTextArea(node, {
             mode: 'text/plain',
-            theme: document.documentElement.classList.contains('dark') ? 'duotone-dark' : 'duotone-light',
+            theme: 'ayu-mirage', //document.documentElement.classList.contains('dark') ? 'duotone-dark' : 'duotone-light',
             indentUnit: 4,
             smartIndent: true,
             tabSize: 4,
