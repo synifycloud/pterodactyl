@@ -10,7 +10,7 @@ import { useFlashKey } from '@/plugins/useFlash';
 import { format } from 'date-fns';
 import CreateSSHKeyForm from '@/components/dashboard/ssh/CreateSSHKeyForm';
 import DeleteSSHKeyButton from '@/components/dashboard/ssh/DeleteSSHKeyButton';
-import { Key } from 'lucide-react';
+import { KeyRound } from 'lucide-react';
 
 export default () => {
     const { clearAndAddHttpError } = useFlashKey('account');
@@ -42,7 +42,7 @@ export default () => {
                                 key={key.fingerprint}
                                 css={[tw`flex space-x-4 items-center`, index > 0 && tw`mt-2`]}
                             >
-                                <Key width={20} css={tw`dark:text-neutral-300 text-neutral-600`} />
+                                <KeyRound width={20} css={tw`dark:text-neutral-300 text-neutral-600`} />
                                 <div css={tw`flex-1`}>
                                     <p css={tw`text-sm break-words font-medium`}>{key.name}</p>
                                     <p css={tw`text-xs mt-1 font-mono truncate`}>SHA256:{key.fingerprint}</p>

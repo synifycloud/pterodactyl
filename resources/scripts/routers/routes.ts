@@ -13,6 +13,20 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import {
+    CalendarDays,
+    CloudCog,
+    CloudUploadIcon,
+    Database,
+    File,
+    History,
+    KeyRound,
+    Network,
+    Rocket,
+    Settings,
+    SquareChevronRight,
+    User,
+} from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -29,6 +43,7 @@ interface RouteDefinition {
     name: string | undefined;
     component: React.ComponentType;
     exact?: boolean;
+    icon?: React.ComponentType;
 }
 
 interface ServerRouteDefinition extends RouteDefinition {
@@ -50,21 +65,25 @@ export default {
             name: 'Account',
             component: AccountOverviewContainer,
             exact: true,
+            icon: User,
         },
         {
             path: '/api',
-            name: 'API Credentials',
+            name: 'API Keys',
             component: AccountApiContainer,
+            icon: CloudCog,
         },
         {
             path: '/ssh',
             name: 'SSH Keys',
             component: AccountSSHContainer,
+            icon: KeyRound,
         },
         {
             path: '/activity',
             name: 'Activity',
             component: ActivityLogContainer,
+            icon: History,
         },
     ],
     server: [
@@ -75,13 +94,15 @@ export default {
             header: 'Console',
             component: ServerConsole,
             exact: true,
+            icon: SquareChevronRight,
         },
         {
             path: '/files',
             permission: 'file.*',
             name: 'Files',
-            header: 'File Management',
+            header: 'Files',
             component: FileManagerContainer,
+            icon: File,
         },
         {
             path: '/files/:action(edit|new)',
@@ -96,13 +117,15 @@ export default {
             name: 'Databases',
             header: 'Databases',
             component: DatabasesContainer,
+            icon: Database,
         },
         {
             path: '/schedules',
             permission: 'schedule.*',
             name: 'Schedules',
-            header: 'Task Scheduling',
+            header: 'Schedules',
             component: ScheduleContainer,
+            icon: CalendarDays,
         },
         {
             path: '/schedules/:id',
@@ -115,8 +138,9 @@ export default {
             path: '/users',
             permission: 'user.*',
             name: 'Users',
-            header: 'User Management',
+            header: 'Users',
             component: UsersContainer,
+            icon: User,
         },
         {
             path: '/backups',
@@ -124,34 +148,39 @@ export default {
             name: 'Backups',
             header: 'Backups',
             component: BackupContainer,
+            icon: CloudUploadIcon,
         },
         {
             path: '/network',
             permission: 'allocation.*',
             name: 'Network',
-            header: 'Network Settings',
+            header: 'Network',
             component: NetworkContainer,
+            icon: Network,
         },
         {
             path: '/startup',
             permission: 'startup.*',
             name: 'Startup',
-            header: 'Startup Settings',
+            header: 'Startup',
             component: StartupContainer,
+            icon: Rocket,
         },
         {
             path: '/settings',
             permission: ['settings.*', 'file.sftp'],
             name: 'Settings',
-            header: 'Server Settings',
+            header: 'Settings',
             component: SettingsContainer,
+            icon: Settings,
         },
         {
             path: '/activity',
             permission: 'activity.*',
             name: 'Activity',
-            header: 'Server Activity',
+            header: 'Activity',
             component: ServerActivityLogContainer,
+            icon: History,
         },
     ],
 } as Routes;

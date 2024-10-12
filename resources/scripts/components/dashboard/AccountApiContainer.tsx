@@ -12,7 +12,7 @@ import GreyRowBox from '@/components/elements/GreyRowBox';
 import { Dialog } from '@/components/elements/dialog';
 import { useFlashKey } from '@/plugins/useFlash';
 import Code from '@/components/elements/Code';
-import { Key, Trash2 } from 'lucide-react';
+import { KeyRound, Trash2 } from 'lucide-react';
 
 export default () => {
     const [deleteIdentifier, setDeleteIdentifier] = useState('');
@@ -65,7 +65,7 @@ export default () => {
                     ) : (
                         keys.map((key, index) => (
                             <GreyRowBox key={key.identifier} css={[tw`flex items-center`, index > 0 && tw`mt-2`]}>
-                                <Key width={20} css={tw`text-neutral-800 dark:text-neutral-300`} />
+                                <KeyRound width={20} css={tw`text-neutral-800 dark:text-neutral-300`} />
                                 <div css={tw`ml-4 flex-1 overflow-hidden`}>
                                     <p css={tw`text-sm break-words`}>{key.description}</p>
                                     <p css={tw`text-2xs text-neutral-500 dark:text-neutral-300 uppercase`}>

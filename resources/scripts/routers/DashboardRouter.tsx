@@ -18,9 +18,10 @@ export default () => {
                 <SubNavigation>
                     {routes.account
                         .filter((route) => !!route.name)
-                        .map(({ path, name, exact = false }) => (
+                        .map(({ path, name, exact = false, icon }) => (
                             <NavLink key={path} to={`/account/${path}`.replace('//', '/')} exact={exact}>
-                                {name}
+                                {icon && React.createElement(icon)}
+                                <span>{name}</span>
                             </NavLink>
                         ))}
                 </SubNavigation>
