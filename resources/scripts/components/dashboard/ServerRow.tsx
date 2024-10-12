@@ -140,7 +140,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                                 <div
                                     className={
                                         'h-full rounded-full ' +
-                                        (alarms.cpu ? 'bg-red-600 dark:bg-red-500' : 'bg-indigo-600 dark:bg-indigo-500')
+                                        (alarms.cpu ? 'bg-red-600 dark:bg-red-500' : 'bg-indigo-500 dark:bg-indigo-400')
                                     }
                                     style={{
                                         width:
