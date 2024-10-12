@@ -6,7 +6,7 @@ import Spinner from '@/components/elements/Spinner';
 interface Props {
     isLoading?: boolean;
     size?: 'xsmall' | 'small' | 'large' | 'xlarge';
-    color?: 'green' | 'red' | 'primary' | 'grey';
+    color?: 'green' | 'red' | 'indigo' | 'grey';
     isSecondary?: boolean;
 }
 
@@ -14,12 +14,12 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${tw`relative inline-block rounded p-2 uppercase tracking-wide text-sm transition-all duration-150 border`};
 
     ${(props) =>
-        ((!props.isSecondary && !props.color) || props.color === 'primary') &&
-        css<Props>`
-            ${(props) => !props.isSecondary && tw`bg-primary-500 border-primary-600 border text-primary-50`};
+        props.color === 'indigo' &&
+        css`
+            ${tw`border-indigo-600 bg-indigo-500 text-indigo-50`};
 
             &:hover:not(:disabled) {
-                ${tw`bg-primary-600 border-primary-700`};
+                ${tw`bg-indigo-600 border-indigo-700`};
             }
         `};
 
@@ -77,12 +77,12 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         props.isSecondary &&
         css<Props>`
-            ${tw`border-neutral-600 bg-transparent text-neutral-200`};
+            ${tw`border-neutral-600 bg-transparent text-neutral-700 dark:text-neutral-200`};
 
             &:hover:not(:disabled) {
-                ${tw`border-neutral-500 text-neutral-100`};
+                ${tw`border-neutral-500 text-neutral-800 dark:text-neutral-100`};
                 ${(props) => props.color === 'red' && tw`bg-red-500 border-red-600 text-red-50`};
-                ${(props) => props.color === 'primary' && tw`bg-primary-500 border-primary-600 text-primary-50`};
+                ${(props) => props.color === 'indigo' && tw`bg-indigo-500 border-indigo-600 text-indigo-50`};
                 ${(props) => props.color === 'green' && tw`bg-green-500 border-green-600 text-green-50`};
             }
         `};

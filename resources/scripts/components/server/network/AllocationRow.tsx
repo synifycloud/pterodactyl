@@ -1,8 +1,6 @@
 import React, { memo, useCallback, useState } from 'react';
 import isEqual from 'react-fast-compare';
 import tw from 'twin.macro';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faNetworkWired } from '@fortawesome/free-solid-svg-icons';
 import InputSpinner from '@/components/elements/InputSpinner';
 import { Textarea } from '@/components/elements/Input';
 import Can from '@/components/elements/Can';
@@ -20,6 +18,7 @@ import setPrimaryServerAllocation from '@/api/server/network/setPrimaryServerAll
 import getServerAllocations from '@/api/swr/getServerAllocations';
 import { ip } from '@/lib/formatters';
 import Code from '@/components/elements/Code';
+import { Network } from 'lucide-react';
 
 const Label = styled.label`
     ${tw`uppercase text-xs mt-1 text-neutral-400 block px-1 select-none transition-colors duration-150`}
@@ -63,7 +62,7 @@ const AllocationRow = ({ allocation }: Props) => {
         <GreyRowBox $hoverable={false} className={'mt-2 flex-wrap md:flex-nowrap'}>
             <div className={'flex w-full items-center md:w-auto'}>
                 <div className={'pl-4 pr-6 text-neutral-400'}>
-                    <FontAwesomeIcon icon={faNetworkWired} />
+                    <Network width={20} />
                 </div>
                 <div className={'mr-4 flex-1 md:w-40'}>
                     {allocation.alias ? (
@@ -96,7 +95,7 @@ const AllocationRow = ({ allocation }: Props) => {
             </div>
             <div className={'mt-4 flex w-full justify-end space-x-4 md:mt-0 md:w-48'}>
                 {allocation.isDefault ? (
-                    <Button size={Button.Sizes.Small} className={'!bg-blue-600 !text-gray-50'} disabled>
+                    <Button size={Button.Sizes.Small} className={'!bg-indigo-600 !text-gray-50'} disabled>
                         Primary
                     </Button>
                 ) : (

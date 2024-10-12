@@ -47,7 +47,11 @@ export default ({ activity, children }: Props) => {
     const properties = wrapProperties(activity.properties);
 
     return (
-        <div className={'group grid grid-cols-10 border-b-2 border-gray-800 py-4 last:rounded-b last:border-0'}>
+        <div
+            className={
+                'group grid grid-cols-10 border-b-2 border-gray-200 py-4 last:rounded-b last:border-0 dark:border-gray-700'
+            }
+        >
             <div className={'hidden select-none items-center justify-center sm:col-span-1 sm:flex'}>
                 <div className={'flex h-10 w-10 items-center overflow-hidden rounded-full bg-gray-600'}>
                     <Avatar name={actor?.uuid || 'system'} />
@@ -55,14 +59,16 @@ export default ({ activity, children }: Props) => {
             </div>
             <div className={'col-span-10 flex sm:col-span-9'}>
                 <div className={'flex-1 px-4 sm:px-0'}>
-                    <div className={'flex items-center text-gray-50'}>
+                    <div className={'flex items-center text-gray-800 dark:text-gray-50'}>
                         <Tooltip placement={'top'} content={actor?.email || 'System User'}>
                             <span>{actor?.username || 'System'}</span>
                         </Tooltip>
                         <span className={'text-gray-400'}>&nbsp;&mdash;&nbsp;</span>
                         <Link
                             to={`#${pathTo({ event: activity.event })}`}
-                            className={'transition-colors duration-75 hover:text-cyan-400 active:text-cyan-400'}
+                            className={
+                                'transition-colors duration-75 hover:text-indigo-600 active:text-indigo-600 dark:hover:text-indigo-300 dark:active:text-indigo-300'
+                            }
                         >
                             {activity.event}
                         </Link>

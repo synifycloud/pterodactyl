@@ -12,6 +12,7 @@ const features: Record<string, ComponentType> = {
     gsl_token: lazy(() => import('@feature/GSLTokenModalFeature')),
     pid_limit: lazy(() => import('@feature/PIDLimitModalFeature')),
     steam_disk_space: lazy(() => import('@feature/SteamDiskSpaceFeature')),
+    minecraft_addons: lazy(() => import('@feature/minecraft_addons/MinecraftAddonsFeature')),
 };
 
 export default features;

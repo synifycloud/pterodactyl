@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileAlt, faFileArchive, faFileImport, faFolder } from '@fortawesome/free-solid-svg-icons';
 import { encodePathSegments } from '@/helpers';
 import { differenceInHours, format, formatDistanceToNow } from 'date-fns';
 import React, { memo } from 'react';
@@ -14,6 +12,7 @@ import { usePermissions } from '@/plugins/usePermissions';
 import { join } from 'path';
 import { bytesToString } from '@/lib/formatters';
 import styles from './style.module.css';
+import { File, FileArchive, FileInput, Folder } from 'lucide-react';
 
 const Clickable: React.FC<{ file: FileObject }> = memo(({ file, children }) => {
     const [canRead] = usePermissions(['file.read']);
@@ -45,13 +44,17 @@ const FileObjectRow = ({ file }: { file: FileObject }) => (
     >
         <SelectFileCheckbox name={file.name} />
         <Clickable file={file}>
-            <div css={tw`flex-none text-neutral-400 ml-6 mr-4 text-lg pl-3`}>
+            <div css={tw`flex-none text-neutral-800 dark:text-neutral-400 ml-6 mr-4 text-lg pl-3`}>
                 {file.isFile ? (
-                    <FontAwesomeIcon
-                        icon={file.isSymlink ? faFileImport : file.isArchiveType() ? faFileArchive : faFileAlt}
-                    />
+                    file.isSymlink ? (
+                        <FileInput width={18} />
+                    ) : file.isArchiveType() ? (
+                        <FileArchive width={18} />
+                    ) : (
+                        <File width={18} />
+                    )
                 ) : (
-                    <FontAwesomeIcon icon={faFolder} />
+                    <Folder width={18} />
                 )}
             </div>
             <div css={tw`flex-1 truncate`}>{file.name}</div>

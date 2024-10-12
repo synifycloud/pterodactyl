@@ -52,7 +52,7 @@ export default () => {
         <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
             {rootAdmin && (
                 <div css={tw`mb-2 flex justify-end items-center`}>
-                    <p css={tw`uppercase text-xs text-neutral-400 mr-2`}>
+                    <p css={tw`uppercase text-xs text-neutral-600 dark:text-neutral-400 mr-2`}>
                         {showOnlyAdmin ? "Showing others' servers" : 'Showing your servers'}
                     </p>
                     <Switch
@@ -68,11 +68,19 @@ export default () => {
                 <Pagination data={servers} onPageSelect={setPage}>
                     {({ items }) =>
                         items.length > 0 ? (
-                            items.map((server, index) => (
-                                <ServerRow key={server.uuid} server={server} css={index > 0 ? tw`mt-2` : undefined} />
-                            ))
+                            <div className='grid grid-cols-1 gap-6 md:grid-cols-2' style={{ gridAutoRows: '1fr' }}>
+                                {items.map((server, index) =>
+                                    index === items.length - 1 && items.length % 2 !== 0 ? (
+                                        <div key={server.uuid} className='md:col-span-2'>
+                                            <ServerRow server={server} />
+                                        </div>
+                                    ) : (
+                                        <ServerRow key={server.uuid} server={server} />
+                                    ),
+                                )}
+                            </div>
                         ) : (
-                            <p css={tw`text-center text-sm text-neutral-400`}>
+                            <p css={tw`text-center text-sm text-neutral-600 dark:text-neutral-400`}>
                                 {showOnlyAdmin
                                     ? 'There are no other servers to display.'
                                     : 'There are no servers associated with your account.'}

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDatabase, faEye, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import Modal from '@/components/elements/Modal';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
@@ -19,6 +17,7 @@ import Label from '@/components/elements/Label';
 import Input from '@/components/elements/Input';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import CopyOnClick from '@/components/elements/CopyOnClick';
+import { Database, Eye, Trash2 } from 'lucide-react';
 
 interface Props {
     database: ServerDatabase;
@@ -140,37 +139,37 @@ export default ({ database, className }: Props) => {
                 </div>
             </Modal>
             <GreyRowBox $hoverable={false} className={className} css={tw`mb-2`}>
-                <div css={tw`hidden md:block`}>
-                    <FontAwesomeIcon icon={faDatabase} fixedWidth />
+                <div css={tw`hidden md:block text-neutral-800 dark:text-neutral-100`}>
+                    <Database width={18} />
                 </div>
                 <div css={tw`flex-1 ml-4`}>
                     <CopyOnClick text={database.name}>
-                        <p css={tw`text-lg`}>{database.name}</p>
+                        <p css={tw`text-lg text-neutral-800 dark:text-neutral-100`}>{database.name}</p>
                     </CopyOnClick>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>
                     <CopyOnClick text={database.connectionString}>
-                        <p css={tw`text-sm`}>{database.connectionString}</p>
+                        <p css={tw`text-sm text-neutral-800 dark:text-neutral-100`}>{database.connectionString}</p>
                     </CopyOnClick>
                     <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Endpoint</p>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>
-                    <p css={tw`text-sm`}>{database.allowConnectionsFrom}</p>
+                    <p css={tw`text-sm text-neutral-800 dark:text-neutral-100`}>{database.allowConnectionsFrom}</p>
                     <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Connections from</p>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>
                     <CopyOnClick text={database.username}>
-                        <p css={tw`text-sm`}>{database.username}</p>
+                        <p css={tw`text-sm text-neutral-800 dark:text-neutral-100`}>{database.username}</p>
                     </CopyOnClick>
                     <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Username</p>
                 </div>
                 <div css={tw`ml-8`}>
                     <Button isSecondary css={tw`mr-2`} onClick={() => setConnectionVisible(true)}>
-                        <FontAwesomeIcon icon={faEye} fixedWidth />
+                        <Eye width={18} />
                     </Button>
                     <Can action={'database.delete'}>
                         <Button color={'red'} isSecondary onClick={() => setVisible(true)}>
-                            <FontAwesomeIcon icon={faTrashAlt} fixedWidth />
+                            <Trash2 width={18} />
                         </Button>
                     </Can>
                 </div>

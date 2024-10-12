@@ -18,7 +18,7 @@ const light = css<Props>`
 `;
 
 const checkboxStyle = css<Props>`
-    ${tw`bg-neutral-500 cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-primary-400 border border-neutral-300 rounded-sm`};
+    ${tw`bg-indigo-100 dark:bg-indigo-900 cursor-pointer appearance-none inline-block align-middle select-none flex-shrink-0 w-4 h-4 text-indigo-600 border border-indigo-300 dark:border-indigo-700 rounded-sm`};
     color-adjust: exact;
     background-origin: border-box;
     transition:
@@ -33,7 +33,7 @@ const checkboxStyle = css<Props>`
     }
 
     &:focus {
-        ${tw`outline-none border-primary-300`};
+        ${tw`outline-none border-indigo-300 dark:border-indigo-600`};
         box-shadow: 0 0 0 1px rgba(9, 103, 210, 0.25);
     }
 `;
@@ -43,11 +43,13 @@ const inputStyle = css<Props>`
     resize: none;
     ${tw`appearance-none outline-none w-full min-w-0`};
     ${tw`p-3 border-2 rounded text-sm transition-all duration-150`};
-    ${tw`bg-neutral-600 border-neutral-500 hover:border-neutral-400 text-neutral-200 shadow-none focus:ring-0`};
+    ${tw`dark:bg-neutral-700 bg-white text-neutral-700 dark:text-neutral-200 shadow-md focus:ring-0`};
+    ${tw`dark:border-neutral-500 hover:dark:border-neutral-400 shadow-md hover:shadow-lg`}
 
     & + .input-help {
         ${tw`mt-1 text-xs`};
-        ${(props) => (props.hasError ? tw`text-red-200` : tw`text-neutral-200`)};
+        ${(props) =>
+            props.hasError ? tw`text-red-500 dark:text-red-200` : tw`text-neutral-600 dark:text-neutral-200`};
     }
 
     &:required,
@@ -56,8 +58,8 @@ const inputStyle = css<Props>`
     }
 
     &:not(:disabled):not(:read-only):focus {
-        ${tw`shadow-md border-primary-300 ring-2 ring-primary-400 ring-opacity-50`};
-        ${(props) => props.hasError && tw`border-red-300 ring-red-200`};
+        ${tw`shadow-md border-indigo-300`};
+        ${(props) => props.hasError && tw`border-red-300`};
     }
 
     &:disabled {

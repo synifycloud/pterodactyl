@@ -15,14 +15,26 @@
 }
 
 .file_row {
-    @apply mb-px flex cursor-pointer items-center rounded-sm bg-neutral-700 text-sm no-underline;
-    @apply hover:bg-neutral-600 hover:text-neutral-100;
+    @apply mb-px flex cursor-pointer items-center rounded-sm bg-neutral-100 text-sm no-underline shadow-md;
+    @apply hover:bg-neutral-300 hover:text-neutral-900;
 
     & > .details {
-        @apply flex flex-1 items-center overflow-hidden truncate px-4 py-2 text-neutral-300 no-underline;
+        @apply flex flex-1 items-center overflow-hidden truncate px-4 py-2 text-neutral-700 no-underline;
 
         &:not(a) {
             @apply cursor-default;
         }
+    }
+}
+
+:global(.dark) .file_row {
+    @apply bg-neutral-800 text-neutral-100 hover:bg-neutral-700;
+
+    & > .details {
+        @apply text-neutral-200;
+    }
+
+    &.selected {
+        @apply bg-neutral-700;
     }
 }

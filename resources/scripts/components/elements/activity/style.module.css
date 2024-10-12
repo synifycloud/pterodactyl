@@ -10,6 +10,10 @@
     @apply mt-1 break-words pr-4 text-sm line-clamp-2;
 
     & strong {
-        @apply break-all font-semibold text-gray-50;
+        @apply break-all font-semibold text-gray-700;
     }
+}
+
+:global(.dark) .description strong {
+    @apply text-gray-50;
 }

@@ -51,7 +51,7 @@ export default () => {
 
     return (
         <div
-            className={`fixed left-0 top-0 z-40 w-full overflow-x-auto bg-white text-neutral-900 shadow-md dark:border-b dark:border-neutral-600/20 dark:bg-neutral-900 dark:text-neutral-200 ${(location.pathname.startsWith('/account') || location.pathname.startsWith('/server')) && 'pl-[60px] duration-300 xl:pl-[240px]'}`}
+            className={`fixed left-0 top-0 z-20 w-full overflow-x-auto bg-white text-neutral-900 shadow-md dark:border-b dark:border-neutral-600/20 dark:bg-neutral-900 dark:text-neutral-200 ${(location.pathname.startsWith('/account') || location.pathname.startsWith('/server')) && 'pl-[60px] duration-300 xl:pl-[240px]'}`}
         >
             <SpinnerOverlay visible={isLoggingOut} />
             <div className={'mx-auto flex h-[3.5rem] w-full items-center'}>

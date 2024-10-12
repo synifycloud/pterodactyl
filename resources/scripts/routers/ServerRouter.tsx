@@ -64,29 +64,27 @@ export default () => {
     return (
         <React.Fragment key={'server-router'}>
             <SubNavigation>
-                <div>
-                    {routes.server
-                        .filter((route) => !!route.name)
-                        .map((route) =>
-                            route.permission ? (
-                                <Can key={route.path} action={route.permission} matchAny>
-                                    <NavLink to={to(route.path, true)} exact={route.exact}>
-                                        {route.name}
-                                    </NavLink>
-                                </Can>
-                            ) : (
-                                <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
+                {routes.server
+                    .filter((route) => !!route.name)
+                    .map((route) =>
+                        route.permission ? (
+                            <Can key={route.path} action={route.permission} matchAny>
+                                <NavLink to={to(route.path, true)} exact={route.exact}>
                                     {route.name}
                                 </NavLink>
-                            ),
-                        )}
-                    {rootAdmin && (
-                        // eslint-disable-next-line react/jsx-no-target-blank
-                        <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
-                            <FontAwesomeIcon icon={faExternalLinkAlt} />
-                        </a>
+                            </Can>
+                        ) : (
+                            <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
+                                {route.name}
+                            </NavLink>
+                        ),
                     )}
-                </div>
+                {rootAdmin && (
+                    // eslint-disable-next-line react/jsx-no-target-blank
+                    <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
+                        <FontAwesomeIcon icon={faExternalLinkAlt} />
+                    </a>
+                )}
             </SubNavigation>
             <div className='grid w-full pl-[60px] pt-14 transition-all duration-300 xl:pl-[240px]'>
                 <NavigationBar />

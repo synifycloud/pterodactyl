@@ -3,8 +3,7 @@ import { PaginatedResult } from '@/api/http';
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 import Button from '@/components/elements/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDoubleLeft, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 
 interface RenderFuncProps<T> {
     items: T[];
@@ -49,14 +48,14 @@ function Pagination<T>({ data: { items, pagination }, onPageSelect, children }: 
             {pages.length > 1 && (
                 <div css={tw`mt-4 flex justify-center`}>
                     {pages[0] > 1 && !isFirstPage && (
-                        <Block isSecondary color={'primary'} onClick={() => onPageSelect(1)}>
-                            <FontAwesomeIcon icon={faAngleDoubleLeft} />
+                        <Block isSecondary color={'indigo'} onClick={() => onPageSelect(1)}>
+                            <ChevronsLeft />
                         </Block>
                     )}
                     {pages.map((i) => (
                         <Block
                             isSecondary={pagination.currentPage !== i}
-                            color={'primary'}
+                            color={'indigo'}
                             key={`block_page_${i}`}
                             onClick={() => onPageSelect(i)}
                         >
@@ -64,8 +63,8 @@ function Pagination<T>({ data: { items, pagination }, onPageSelect, children }: 
                         </Block>
                     ))}
                     {pages[4] < pagination.totalPages && !isLastPage && (
-                        <Block isSecondary color={'primary'} onClick={() => onPageSelect(pagination.totalPages)}>
-                            <FontAwesomeIcon icon={faAngleDoubleRight} />
+                        <Block isSecondary color={'indigo'} onClick={() => onPageSelect(pagination.totalPages)}>
+                            <ChevronsRight />
                         </Block>
                     )}
                 </div>

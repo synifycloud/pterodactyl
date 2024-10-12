@@ -1,13 +1,4 @@
 import React, { useState } from 'react';
-import {
-    faBoxOpen,
-    faCloudDownloadAlt,
-    faEllipsisH,
-    faLock,
-    faTrashAlt,
-    faUnlock,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DropdownMenu, { DropdownButtonRow } from '@/components/elements/DropdownMenu';
 import getBackupDownloadUrl from '@/api/server/backups/getBackupDownloadUrl';
 import useFlash from '@/plugins/useFlash';
@@ -22,6 +13,7 @@ import Input from '@/components/elements/Input';
 import { restoreServerBackup } from '@/api/server/backups';
 import http, { httpErrorToHuman } from '@/api/http';
 import { Dialog } from '@/components/elements/dialog';
+import { ArchiveRestore, CloudDownload, Ellipsis, Lock, Trash2, Unlock } from 'lucide-react';
 
 interface Props {
     backup: ServerBackup;
@@ -138,7 +130,7 @@ export default ({ backup }: Props) => {
                     Your server will be stopped. You will not be able to control the power state, access the file
                     manager, or create additional backups until completed.
                 </p>
-                <p css={tw`mt-4 -mb-2 bg-gray-700 p-3 rounded`}>
+                <p css={tw`mt-4 -mb-2 bg-neutral-100 dark:bg-neutral-700 p-3 rounded`}>
                     <label htmlFor={'restore_truncate'} css={tw`text-base flex items-center cursor-pointer`}>
                         <Input
                             type={'checkbox'}
@@ -167,38 +159,38 @@ export default ({ backup }: Props) => {
                     renderToggle={(onClick) => (
                         <button
                             onClick={onClick}
-                            css={tw`text-gray-200 transition-colors duration-150 hover:text-gray-100 p-2`}
+                            css={tw`text-gray-700 dark:text-gray-200 transition-colors duration-150 hover:text-gray-500 hover:dark:text-gray-100 p-2`}
                         >
-                            <FontAwesomeIcon icon={faEllipsisH} />
+                            <Ellipsis width={20} />
                         </button>
                     )}
                 >
                     <div css={tw`text-sm`}>
                         <Can action={'backup.download'}>
                             <DropdownButtonRow onClick={doDownload}>
-                                <FontAwesomeIcon fixedWidth icon={faCloudDownloadAlt} css={tw`text-xs`} />
+                                <CloudDownload width={16} css={tw`text-xs`} />
                                 <span css={tw`ml-2`}>Download</span>
                             </DropdownButtonRow>
                         </Can>
                         <Can action={'backup.restore'}>
                             <DropdownButtonRow onClick={() => setModal('restore')}>
-                                <FontAwesomeIcon fixedWidth icon={faBoxOpen} css={tw`text-xs`} />
+                                <ArchiveRestore width={16} css={tw`text-xs`} />
                                 <span css={tw`ml-2`}>Restore</span>
                             </DropdownButtonRow>
                         </Can>
                         <Can action={'backup.delete'}>
                             <>
                                 <DropdownButtonRow onClick={onLockToggle}>
-                                    <FontAwesomeIcon
-                                        fixedWidth
-                                        icon={backup.isLocked ? faUnlock : faLock}
-                                        css={tw`text-xs mr-2`}
-                                    />
+                                    {backup.isLocked ? (
+                                        <Unlock width={16} css={tw`text-xs mr-2`} />
+                                    ) : (
+                                        <Lock width={16} css={tw`text-xs mr-2`} />
+                                    )}
                                     {backup.isLocked ? 'Unlock' : 'Lock'}
                                 </DropdownButtonRow>
                                 {!backup.isLocked && (
-                                    <DropdownButtonRow danger onClick={() => setModal('delete')}>
-                                        <FontAwesomeIcon fixedWidth icon={faTrashAlt} css={tw`text-xs`} />
+                                    <DropdownButtonRow danger={true} onClick={() => setModal('delete')}>
+                                        <Trash2 width={16} css={tw`text-xs`} />
                                         <span css={tw`ml-2`}>Delete</span>
                                     </DropdownButtonRow>
                                 )}
@@ -211,7 +203,7 @@ export default ({ backup }: Props) => {
                     onClick={() => setModal('delete')}
                     css={tw`text-gray-200 transition-colors duration-150 hover:text-gray-100 p-2`}
                 >
-                    <FontAwesomeIcon icon={faTrashAlt} />
+                    <Trash2 width={16} />
                 </button>
             )}
         </>

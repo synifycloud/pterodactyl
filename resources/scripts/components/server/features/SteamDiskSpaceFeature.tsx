@@ -58,8 +58,9 @@ const SteamDiskSpaceFeature = () => {
                     </p>
                     <p css={tw`mt-4`}>
                         Ensure the machine has enough disk space by typing{' '}
-                        <code css={tw`font-mono bg-neutral-900 rounded py-1 px-2`}>df -h</code> on the machine hosting
-                        this server. Delete files or increase the available disk space to resolve the issue.
+                        <code css={tw`font-mono bg-neutral-100 dark:bg-neutral-900 rounded py-1 px-2`}>df -h</code> on
+                        the machine hosting this server. Delete files or increase the available disk space to resolve
+                        the issue.
                     </p>
                     <div css={tw`mt-8 sm:flex items-center justify-end`}>
                         <Button onClick={() => setVisible(false)} css={tw`w-full sm:w-auto border-transparent`}>

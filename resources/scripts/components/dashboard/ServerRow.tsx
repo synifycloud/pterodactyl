@@ -1,6 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEthernet, faHdd, faMemory, faMicrochip, faServer } from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Server } from '@/api/server/getServer';
 import getServerResourceUsage, { ServerPowerState, ServerStats } from '@/api/server/getServerResourceUsage';
@@ -9,37 +7,23 @@ import tw from 'twin.macro';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import Spinner from '@/components/elements/Spinner';
 import styled from 'styled-components/macro';
-import isEqual from 'react-fast-compare';
+import { Cpu, EthernetPort, HardDrive, Server as LucideServer, MemoryStick } from 'lucide-react';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
 const isAlarmState = (current: number, limit: number): boolean => limit > 0 && current / (limit * 1024 * 1024) >= 0.9;
 
-const Icon = memo(
-    styled(FontAwesomeIcon)<{ $alarm: boolean }>`
-        ${(props) => (props.$alarm ? tw`text-red-400` : tw`text-neutral-500`)};
-    `,
-    isEqual,
-);
-
 const IconDescription = styled.p<{ $alarm: boolean }>`
-    ${tw`text-sm ml-2`};
-    ${(props) => (props.$alarm ? tw`text-white` : tw`text-neutral-400`)};
+    ${tw`text-sm ml-2 flex items-center`};
+    ${(props) => (props.$alarm ? tw`text-red-400 dark:text-red-300` : tw`text-neutral-600 dark:text-neutral-400`)};
 `;
 
 const StatusIndicatorBox = styled(GreyRowBox)<{ $status: ServerPowerState | undefined }>`
-    ${tw`grid grid-cols-12 gap-4 relative`};
+    ${tw`grid gap-4 relative h-full grid-rows-4 rounded-lg`};
 
     & .status-bar {
-        ${tw`w-2 bg-red-500 absolute right-0 z-20 rounded-full m-1 opacity-50 transition-all duration-150`};
-        height: calc(100% - 0.5rem);
-
-        ${({ $status }) =>
-            !$status || $status === 'offline'
-                ? tw`bg-red-500`
-                : $status === 'running'
-                  ? tw`bg-green-500`
-                  : tw`bg-yellow-500`};
+        ${tw`h-2 absolute bottom-0 z-20 rounded-full m-1 opacity-50 transition-all duration-150`};
+        width: calc(100% - 0.5rem);
     }
 
     &:hover .status-bar {
@@ -90,21 +74,21 @@ export default ({ server, className }: { server: Server; className?: string }) =
 
     return (
         <StatusIndicatorBox as={Link} to={`/server/${server.id}`} className={className} $status={stats?.status}>
-            <div css={tw`flex items-center col-span-12 sm:col-span-5 lg:col-span-6`}>
-                <div className={'icon mr-4'}>
-                    <FontAwesomeIcon icon={faServer} />
-                </div>
+            <div className='flex h-full items-start justify-between'>
                 <div>
-                    <p css={tw`text-lg break-words`}>{server.name}</p>
-                    {!!server.description && (
-                        <p css={tw`text-sm text-neutral-300 break-words line-clamp-2`}>{server.description}</p>
-                    )}
+                    <div className={'mr-4 flex items-center gap-2'}>
+                        <LucideServer width={20} />
+                        <p css={tw`text-lg break-words`}>{server.name}</p>
+                    </div>
+                    <div className='mt-4'>
+                        {!!server.description && (
+                            <p css={tw`text-sm text-neutral-300 break-words line-clamp-2`}>{server.description}</p>
+                        )}
+                    </div>
                 </div>
-            </div>
-            <div css={tw`flex-1 ml-4 lg:block lg:col-span-2 hidden`}>
-                <div css={tw`flex justify-center`}>
-                    <FontAwesomeIcon icon={faEthernet} css={tw`text-neutral-500`} />
-                    <p css={tw`text-sm text-neutral-400 ml-2`}>
+                <div className='flex items-center'>
+                    <EthernetPort width={18} css={tw`text-neutral-500`} />
+                    <p css={tw`text-sm text-neutral-600 dark:text-neutral-400 ml-2`}>
                         {server.allocations
                             .filter((alloc) => alloc.isDefault)
                             .map((allocation) => (
@@ -115,7 +99,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     </p>
                 </div>
             </div>
-            <div css={tw`hidden col-span-7 lg:col-span-4 sm:flex items-baseline justify-center`}>
+            <div css={tw`row-span-3 flex flex-col gap-4`}>
                 {!stats || isSuspended ? (
                     isSuspended ? (
                         <div css={tw`flex-1 text-center`}>
@@ -125,7 +109,9 @@ export default ({ server, className }: { server: Server; className?: string }) =
                         </div>
                     ) : server.isTransferring || server.status ? (
                         <div css={tw`flex-1 text-center`}>
-                            <span css={tw`bg-neutral-500 rounded px-2 py-1 text-neutral-100 text-xs`}>
+                            <span
+                                css={tw`bg-neutral-200 dark:bg-neutral-700 rounded px-2 py-1 text-neutral-700 dark:text-neutral-100 text-xs`}
+                            >
                                 {server.isTransferring
                                     ? 'Transferring'
                                     : server.status === 'installing'
@@ -140,37 +126,98 @@ export default ({ server, className }: { server: Server; className?: string }) =
                     )
                 ) : (
                     <React.Fragment>
-                        <div css={tw`flex-1 ml-4 sm:block hidden`}>
-                            <div css={tw`flex justify-center`}>
-                                <Icon icon={faMicrochip} $alarm={alarms.cpu} />
-                                <IconDescription $alarm={alarms.cpu}>
-                                    {stats.cpuUsagePercent.toFixed(2)} %
-                                </IconDescription>
+                        <div>
+                            <div css={tw`flex justify-between`}>
+                                <div css={tw`flex justify-center`}>
+                                    <Cpu className={`${alarms.cpu ? 'text-red-400' : 'text-neutral-500'}`} />
+                                    <IconDescription $alarm={alarms.cpu}>
+                                        {stats.cpuUsagePercent.toFixed(2)} %
+                                    </IconDescription>
+                                </div>
+                                <p css={tw`text-xs text-neutral-600 mt-1`}>of {cpuLimit}</p>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>of {cpuLimit}</p>
+                            <div className='mt-1 h-4 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700'>
+                                <div
+                                    className={
+                                        'h-full rounded-full ' +
+                                        (alarms.cpu ? 'bg-red-600 dark:bg-red-500' : 'bg-indigo-600 dark:bg-indigo-500')
+                                    }
+                                    style={{
+                                        width:
+                                            server.limits.cpu === 0
+                                                ? '0%'
+                                                : `${(stats.cpuUsagePercent / server.limits.cpu) * 100}%`,
+                                    }}
+                                />
+                            </div>
                         </div>
-                        <div css={tw`flex-1 ml-4 sm:block hidden`}>
-                            <div css={tw`flex justify-center`}>
-                                <Icon icon={faMemory} $alarm={alarms.memory} />
-                                <IconDescription $alarm={alarms.memory}>
-                                    {bytesToString(stats.memoryUsageInBytes)}
-                                </IconDescription>
+                        <div>
+                            <div css={tw`flex justify-between`}>
+                                <div css={tw`flex justify-center`}>
+                                    <MemoryStick className={`${alarms.memory ? 'text-red-400' : 'text-neutral-500'}`} />
+                                    <IconDescription $alarm={alarms.memory}>
+                                        {bytesToString(stats.memoryUsageInBytes)}
+                                    </IconDescription>
+                                </div>
+                                <p css={tw`text-xs text-neutral-600 mt-1`}>of {memoryLimit}</p>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>of {memoryLimit}</p>
+                            <div className='mt-1 h-4 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700'>
+                                <div
+                                    className={
+                                        'h-full rounded-full ' +
+                                        (alarms.memory
+                                            ? 'bg-red-500 dark:bg-red-400'
+                                            : 'bg-indigo-500 dark:bg-indigo-400')
+                                    }
+                                    style={{
+                                        width:
+                                            server.limits.memory === 0
+                                                ? '0%'
+                                                : `${(stats.memoryUsageInBytes / mbToBytes(server.limits.memory)) * 100}%`,
+                                    }}
+                                />
+                            </div>
                         </div>
-                        <div css={tw`flex-1 ml-4 sm:block hidden`}>
-                            <div css={tw`flex justify-center`}>
-                                <Icon icon={faHdd} $alarm={alarms.disk} />
-                                <IconDescription $alarm={alarms.disk}>
-                                    {bytesToString(stats.diskUsageInBytes)}
-                                </IconDescription>
+                        <div>
+                            <div css={tw`flex justify-between`}>
+                                <div css={tw`flex justify-center`}>
+                                    <HardDrive className={`${alarms.disk ? 'text-red-400' : 'text-neutral-500'}`} />
+                                    <IconDescription $alarm={alarms.disk}>
+                                        {bytesToString(stats.diskUsageInBytes)}
+                                    </IconDescription>
+                                </div>
+                                <p css={tw`text-xs text-neutral-600 mt-1`}>of {diskLimit}</p>
                             </div>
-                            <p css={tw`text-xs text-neutral-600 text-center mt-1`}>of {diskLimit}</p>
+                            <div className='mt-1 h-4 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700'>
+                                <div
+                                    className={
+                                        'h-full rounded-full ' +
+                                        (alarms.disk
+                                            ? 'bg-red-500 dark:bg-red-400'
+                                            : 'bg-indigo-500 dark:bg-indigo-400')
+                                    }
+                                    style={{
+                                        width:
+                                            server.limits.disk === 0
+                                                ? '0%'
+                                                : `${(stats.diskUsageInBytes / mbToBytes(server.limits.disk)) * 100}%`,
+                                    }}
+                                />
+                            </div>
                         </div>
                     </React.Fragment>
                 )}
             </div>
-            <div className={'status-bar'} />
+            <div
+                className={
+                    'status-bar ' +
+                    (stats?.status === 'running'
+                        ? 'bg-green-600 dark:bg-green-500'
+                        : stats?.status === 'offline'
+                          ? 'bg-red-600 dark:bg-red-500'
+                          : 'bg-yellow-600 dark:bg-yellow-500')
+                }
+            />
         </StatusIndicatorBox>
     );
 };

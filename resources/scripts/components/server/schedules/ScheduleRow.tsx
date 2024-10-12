@@ -1,19 +1,18 @@
 import React from 'react';
 import { Schedule } from '@/api/server/schedules/getServerSchedules';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import tw from 'twin.macro';
 import ScheduleCronRow from '@/components/server/schedules/ScheduleCronRow';
+import { Calendar } from 'lucide-react';
 
 export default ({ schedule }: { schedule: Schedule }) => (
     <>
-        <div css={tw`hidden md:block`}>
-            <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
+        <div css={tw`hidden md:block text-neutral-800 dark:text-neutral-100`}>
+            <Calendar width={18} />
         </div>
-        <div css={tw`flex-1 md:ml-4`}>
+        <div css={tw`flex-1 md:ml-4 text-neutral-800 dark:text-neutral-100`}>
             <p>{schedule.name}</p>
-            <p css={tw`text-xs text-neutral-400`}>
+            <p css={tw`text-xs text-neutral-600 dark:text-neutral-400`}>
                 Last run at: {schedule.lastRunAt ? format(schedule.lastRunAt, "MMM do 'at' h:mma") : 'never'}
             </p>
         </div>
@@ -27,7 +26,10 @@ export default ({ schedule }: { schedule: Schedule }) => (
                 {schedule.isActive ? 'Active' : 'Inactive'}
             </p>
         </div>
-        <ScheduleCronRow cron={schedule.cron} css={tw`mx-auto sm:mx-8 w-full sm:w-auto mt-4 sm:mt-0`} />
+        <ScheduleCronRow
+            cron={schedule.cron}
+            css={tw`mx-auto sm:mx-8 w-full sm:w-auto mt-4 sm:mt-0 text-neutral-800 dark:`}
+        />
         <div>
             <p
                 css={[

@@ -16,15 +16,13 @@ export default () => {
         <>
             {location.pathname.startsWith('/account') && (
                 <SubNavigation>
-                    <div>
-                        {routes.account
-                            .filter((route) => !!route.name)
-                            .map(({ path, name, exact = false }) => (
-                                <NavLink key={path} to={`/account/${path}`.replace('//', '/')} exact={exact}>
-                                    {name}
-                                </NavLink>
-                            ))}
-                    </div>
+                    {routes.account
+                        .filter((route) => !!route.name)
+                        .map(({ path, name, exact = false }) => (
+                            <NavLink key={path} to={`/account/${path}`.replace('//', '/')} exact={exact}>
+                                {name}
+                            </NavLink>
+                        ))}
                 </SubNavigation>
             )}
             <div

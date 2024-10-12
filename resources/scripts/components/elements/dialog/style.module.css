@@ -3,12 +3,20 @@
 }
 
 .panel {
-    @apply relative mx-auto w-full max-w-xl rounded bg-gray-600 text-left shadow-lg;
-    @apply ring-4 ring-gray-800 ring-opacity-80;
+    @apply relative mx-auto w-full max-w-xl rounded bg-white text-left shadow-lg;
+    @apply ring-4 ring-neutral-100 ring-opacity-80;
+}
+
+:global(.dark) .panel {
+    @apply bg-neutral-800 ring-neutral-700;
 }
 
 .title {
-    @apply mb-2 pr-4 font-header text-xl font-medium text-gray-50;
+    @apply mb-2 pr-4 font-header text-xl font-medium text-neutral-900;
+}
+
+:global(.dark) .title {
+    @apply text-neutral-100;
 }
 
 .close_icon {

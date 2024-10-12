@@ -13,7 +13,7 @@
     }
 
     &.secondary {
-        @apply bg-transparent text-gray-50;
+        @apply bg-transparent text-gray-900 dark:text-gray-50;
 
         &:disabled {
             background: transparent !important;
@@ -34,33 +34,38 @@
 }
 
 .primary {
-    @apply bg-blue-600 text-blue-50;
-    @apply hover:bg-blue-500 focus:ring-blue-400 focus:ring-opacity-75 active:bg-blue-500;
+    @apply bg-indigo-600 text-indigo-50;
+    @apply hover:bg-indigo-500 focus:ring-indigo-400 focus:ring-opacity-75 active:bg-indigo-500;
 
     &.secondary {
-        @apply hover:bg-blue-600 active:bg-blue-600;
+        @apply hover:bg-indigo-600 active:bg-indigo-600;
     }
 
     &:disabled {
-        @apply bg-blue-500/75 text-blue-200/75;
+        @apply bg-indigo-500/75 text-indigo-400/75;
     }
 }
 
 .text {
-    @apply bg-white text-neutral-900 dark:bg-neutral-800 dark:text-neutral-50;
-    @apply hover:bg-neutral-200 focus:ring-neutral-300 focus:ring-opacity-50 active:bg-neutral-100 dark:hover:bg-neutral-700 dark:active:bg-neutral-800;
+    @apply bg-white text-neutral-900;
+    @apply hover:bg-neutral-200 focus:ring-neutral-300 focus:ring-opacity-50 active:bg-neutral-100;
 
     &.secondary {
-        @apply hover:bg-gray-500 active:bg-gray-500;
+        @apply hover:bg-gray-200 active:bg-gray-500 hover:dark:bg-gray-700;
     }
 
     &:disabled {
-        @apply bg-gray-500/75 text-gray-200/75;
+        @apply bg-gray-500/75 dark:text-gray-200/75;
     }
 }
 
+:global(.dark) .text {
+    @apply bg-neutral-800 text-neutral-50;
+    @apply hover:bg-neutral-700 active:bg-neutral-800;
+}
+
 .danger {
-    @apply bg-red-600 text-gray-50;
+    @apply bg-red-600 text-gray-800 hover:text-white;
     @apply hover:bg-red-500 focus:ring-red-400 focus:ring-opacity-75 active:bg-red-500;
 
     &.secondary {
@@ -70,4 +75,8 @@
     &:disabled {
         @apply bg-red-600/75 text-red-50/75;
     }
+}
+
+:global(.dark) .danger {
+    @apply text-red-50;
 }
